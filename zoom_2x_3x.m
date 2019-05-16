@@ -1,10 +1,12 @@
 z = imread('lenna.png');
-z = z(:,:,1);
-% z = imread('cameraman.tif');
-%https://stackoverflow.com/questions/23255344/converting-code-to-take-rgb-image-instead-of-grayscale
 
+figure, imshow(z), title('Imagem original')
 
-figure, imshow(uint8(z))
+red = z(:,:,1);
+green = z(:,:,2);
+blue = z(:,:,3);
+% new_im = cat(3, red, green, blue);
+% figure, imshow(new_im), title('MERGED');
 
 % coordenadas originais
 
@@ -20,17 +22,23 @@ for i=1:512
     end
 end
 
-% faz a interpolaÁ„o
+% faz a interpola√ß√£o
 tic
-z1 = interp2(double(x), double(y), double(z), x1, y1, 'cubic');
+z1_red = interp2(double(x), double(y), double(red), x1, y1, 'cubic');
+z1_green = interp2(double(x), double(y), double(green), x1, y1, 'cubic');
+z1_blue = interp2(double(x), double(y), double(blue), x1, y1, 'cubic');
 toc
 
 tic
-z11 = interp2(double(x), double(y), double(z), x1, y1, 'nearest');
+z11_red = interp2(double(x), double(y), double(red), x1, y1, 'nearest');
+z11_green = interp2(double(x), double(y), double(green), x1, y1, 'nearest');
+z11_blue = interp2(double(x), double(y), double(blue), x1, y1, 'nearest');
 toc
 
-figure, imshow(uint8(z1))
-figure, imshow(uint8(z11))
+z1 = cat(3, z1_red, z1_green, z1_blue);
+z11 = cat(3, z11_red, z11_green, z11_blue);
+figure, imshow(uint8(z1)), title('C√∫bica zoom 2x')
+figure, imshow(uint8(z11)), title('Vizinho Mais Pr√≥ximo zoom 2x')
 
 a = 3;
 for i=1:512
@@ -40,17 +48,21 @@ for i=1:512
     end
 end
 
-% faz a interpolaÁ„o
+% faz a interpola√ß√£o
 tic
-z2 = interp2(double(x), double(y), double(z), x2, y2, 'cubic');
+z2_red = interp2(double(x), double(y), double(red), x2, y2, 'cubic');
+z2_green = interp2(double(x), double(y), double(green), x2, y2, 'cubic');
+z2_blue = interp2(double(x), double(y), double(blue), x2, y2, 'cubic');
 toc
 
 tic
-z22 = interp2(double(x), double(y), double(z), x2, y2, 'nearest');
+z22_red = interp2(double(x), double(y), double(red), x2, y2, 'nearest');
+z22_green = interp2(double(x), double(y), double(green), x2, y2, 'nearest');
+z22_blue = interp2(double(x), double(y), double(blue), x2, y2, 'nearest');
 toc
 
-figure, imshow(uint8(z2))
-figure, imshow(uint8(z22))
+z2 = cat(3, z2_red, z2_green, z2_blue);
+z22 = cat(3, z22_red, z22_green, z22_blue);
 
-% filtro da media truncada
-% usar projeÁ„o reduzida - por linha
+figure, imshow(uint8(z2)), title('C√∫bica zoom 3x')
+figure, imshow(uint8(z22)), title('Vizinho Mais Pr√≥ximo zoom 3x')
