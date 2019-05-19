@@ -3,7 +3,7 @@
 % escala_desejada é um número
 % se escala_desejada > 1, aumenta a imagem
 % se escala_desejada < 1, diminui a imagem
-
+% A imagem deve ser do tamanho 512x512 - seguimos a resolução da lenna original
 function escala(in_image, scale)
 
     [~, FileName, ~] = fileparts(in_image);
